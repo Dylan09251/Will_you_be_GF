@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Will You Be My Girlfriend?</title>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+overflow-x:hidden;
+color:white;
+text-align:center;
+}
+
+section{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:40px 20px;
+}
+
+h1{
+font-size:3rem;
+margin-bottom:20px;
+text-shadow:0 3px 10px rgba(0,0,0,.2);
+}
+
+h2{
+font-size:2rem;
+margin-bottom:20px;
+}
+
+p{
+max-width:700px;
+font-size:1.2rem;
+line-height:1.6;
+}
+
+.btn{
+padding:15px 35px;
+border:none;
+border-radius:50px;
+font-size:1.1rem;
+cursor:pointer;
+margin:10px;
+transition:.3s;
+}
+
+.yes{
+background:#ff4d6d;
+color:white;
+}
+
+.no{
+background:white;
+color:#ff4d6d;
+position:relative;
+}
+
+.btn:hover{
+transform:scale(1.05);
+}
+
+.hero{
+position:relative;
+}
+
+.hero h1{
+animation:fadeIn 2s ease;
+}
+
+.hero p{
+animation:fadeIn 3s ease;
+}
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+width:100%;
+max-width:1000px;
+margin-top:30px;
+}
+
+.gallery img{
+width:100%;
+height:300px;
+object-fit:cover;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.2);
+transition:.4s;
+}
+
+.gallery img:hover{
+transform:scale(1.05);
+}
+
+.reasons{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+max-width:1000px;
+width:100%;
+}
+
+.card{
+background:rgba(255,255,255,.2);
+backdrop-filter:blur(10px);
+padding:25px;
+border-radius:20px;
+animation:float 3s infinite ease-in-out;
+}
+
+.question{
+position:relative;
+}
+
+.buttons{
+position:relative;
+height:200px;
+width:100%;
+max-width:600px;
+}
+
+.success{
+display:none;
+background:#ff4d6d;
+}
+
+.success h1{
+font-size:4rem;
+}
+
+.music-btn{
+position:fixed;
+top:20px;
+right:20px;
+background:white;
+color:#ff4d6d;
+border:none;
+padding:10px 20px;
+border-radius:30px;
+cursor:pointer;
+z-index:999;
+}
+
+.heart{
+position:fixed;
+bottom:-50px;
+font-size:25px;
+animation:rise linear forwards;
+pointer-events:none;
+}
+
+@keyframes rise{
+to{
+transform:translateY(-120vh);
+opacity:0;
+}
+}
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(30px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+@keyframes float{
+50%{
+transform:translateY(-10px);
+}
+}
+</style>
+</head>
+
+<body>
+
+<button class="music-btn" onclick="toggleMusic()">
+🎵 Music
+</button>
+
+<audio id="music" loop>
+<source src="YOUR_SONG.mp3" type="audio/mpeg">
+</audio>
+
+<section class="hero">
+
+<h1>Hey HER NAME ❤️</h1>
+
+<p>
+I made something special just for you...
+because there’s something important
+I want to ask.
+</p>
+
+<br>
+
+<button class="btn yes"
+onclick="scrollToSection('memories')">
+Start ❤️
+</button>
+
+</section>
+
+<section id="memories">
+
+<h2>Some Of My Favorite Memories</h2>
+
+<div class="gallery">
+
+<img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2">
+<img src="https://images.unsplash.com/photo-1517841905240-472988babdf9">
+<img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1">
+<img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659">
+
+</div>
+
+</section>
+
+<section>
+
+<h2>Why You're Amazing</h2>
+
+<div class="reasons">
+
+<div class="card">
+❤️ You make every day brighter.
+</div>
+
+<div class="card">
+😂 You always make me laugh.
+</div>
+
+<div class="card">
+✨ You're genuinely beautiful inside and out.
+</div>
+
+<div class="card">
+🌎 My favorite place is wherever you are.
+</div>
+
+</div>
+
+</section>
+
+<section class="question">
+
+<h2>So...</h2>
+
+<h1>Will You Be My Girlfriend?</h1>
+
+<div class="buttons">
+
+<button class="btn yes"
+onclick="sayYes()">
+YES ❤️
+</button>
+
+<button id="noBtn"
+class="btn no">
+Not Yet 😅
+</button>
+
+</div>
+
+</section>
+
+<section id="success"
+class="success">
+
+<h1>YAY!!! 🎉</h1>
+
+<p>
+You just made me the happiest person alive.
+Officially boyfriend & girlfriend ❤️
+</p>
+
+</section>
+
+<script>
+
+const noBtn = document.getElementById("noBtn");
+
+const noTexts = [
+"Are you sure? 😳",
+"Really sure? 🥺",
+"Think again 😭",
+"Last chance 😅",
+"Okay stop 😂",
+"Just click YES ❤️"
+];
+
+let count = 0;
+
+noBtn.addEventListener("mouseover", () => {
+
+const x = Math.random()*400-200;
+const y = Math.random()*150-75;
+
+noBtn.style.transform =
+`translate(${x}px,${y}px)`;
+
+if(count < noTexts.length){
+noBtn.innerText = noTexts[count];
+count++;
+}
+
+});
+
+function scrollToSection(id){
+document.getElementById(id)
+.scrollIntoView({
+behavior:"smooth"
+});
+}
+
+function sayYes(){
+
+document.getElementById("success")
+.style.display="flex";
+
+document.getElementById("success")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+confetti({
+particleCount:300,
+spread:180,
+origin:{y:.6}
+});
+
+setInterval(()=>{
+confetti({
+particleCount:50,
+spread:120
+});
+},2000);
+
+}
+
+function toggleMusic(){
+
+const music =
+document.getElementById("music");
+
+if(music.paused){
+music.play();
+}
+else{
+music.pause();
+}
+
+}
+
+function createHeart(){
+
+const heart =
+document.createElement("div");
+
+heart.classList.add("heart");
+
+heart.innerHTML="❤️";
+
+heart.style.left =
+Math.random()*100 + "vw";
+
+heart.style.animationDuration =
+(4 + Math.random()*4) + "s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},8000);
+
+}
+
+setInterval(createHeart,500);
+
+</script>
+
+</body>
+</html>
