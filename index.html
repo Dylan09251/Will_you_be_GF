@@ -367,7 +367,7 @@ You make every day brighter. No matter what I'm dealing with
 </div>
 
 <div class="card">
-You always make me laugh.
+You are my favorite person.
 </div>
 
 <div class="card">
@@ -589,23 +589,23 @@ if(note === 3){
 text.innerHTML =
 "Just a reminder: you're pretty amazing, and I'm really glad you're in my life. 🌻";
 }
-
-box.style.display = "block";
-
-}
-  function openLetter(){
-document.getElementById("letterModal").style.display="flex";
-}
-
-function closeLetter(){
-document.getElementById("letterModal").style.display="none";
-}
-  if(note === 4){
+if(note === 4){
 text.innerHTML =
 "Because asking you over text felt lame.<br><br>" +
 "Because flowers eventually die but websites are forever.<br><br>" +
 "Because apparently building an entire website seemed easier than acting normal about how much I like you.<br><br>" +
 "And because you're worth the effort. ❤️";
+}
+
+box.style.display = "block";
+
+}
+function openLetter(){
+document.getElementById("letterModal").style.display="flex";
+}
+
+function closeLetter(){
+document.getElementById("letterModal").style.display="none";
 }
   
 </script>
