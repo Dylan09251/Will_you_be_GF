@@ -266,6 +266,10 @@ z-index:100;
 Open When You Wonder Why I Made This Website
 </button>
 
+  <div id="noteBox" class="memory" style="display:none;">
+    <p id="noteText"></p>
+</div>
+
 <audio id="music" loop>
 <source src="YOUR_SONG.mp3" type="audio/mpeg">
 </audio>
@@ -521,29 +525,6 @@ music.pause();
 
 }
 
-  function showNote(note){
-
-const box = document.getElementById("noteBox");
-const text = document.getElementById("noteText");
-
-if(note === 1){
-text.innerHTML =
-"Seeing you happy is one of my favorite things. ❤️";
-}
-
-if(note === 2){
-text.innerHTML =
-"You're stronger than you give yourself credit for, and I hope you never forget that.";
-}
-
-if(note === 3){
-text.innerHTML =
-"Just a reminder: you're pretty amazing, and I'm really glad you're in my life. 🌻";
-}
-
-box.style.display = "block";
-
-}
 
 function createHeart(){
 
